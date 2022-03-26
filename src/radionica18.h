@@ -11,6 +11,16 @@
 #include <mrm-servo.h>
 #include <mrm-therm-b-can.h>
 
-void RobotLine::radionica() {
+void RobotLine::radionica18() {
     
 }
+
+/*
+Ponavljanje pračenje linije, pračenje zida i korištenje servo motora. 
+Naglasak na sljedećim naredbama: 
+    --> go();
+    --> line();
+    --> frontLeft();
+    --> front();
+Cilj: Preći s pračenja linije na pračenje zida i nazad
+*/

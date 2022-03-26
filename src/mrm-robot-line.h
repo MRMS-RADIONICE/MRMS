@@ -352,6 +352,30 @@ public:
 	@return - Roll in degrees. Inclination to the left or right. Values -90 - 90. Leveled robot shows 0�.
 	*/
 	void radionica();
+	void radionica1();
+	void radionica2();
+	void radionica3();
+	void radionica4();
+	void radionica5();
+	void radionica6();
+	void radionica7();
+	void radionica8();
+	void radionica9();
+	void radionica10();
+	void radionica11();
+	void radionica12();
+	void radionica13();
+	void radionica14();
+	void radionica15();
+	void radionica16();
+	void radionica17();
+	void radionica18();
+	void radionica19();
+	void radionica20();
+	void radionica21();
+	void radionica22();
+	void radionica23();
+	void radionica24();
 
 	/** Color sensor's saturation
 	@param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
