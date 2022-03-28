@@ -806,7 +806,7 @@ void RobotLine::lineFollow() {
 	static uint32_t ms = 0;
 	if (setup()){
 		ms = millis();
-		armUp();
+		//armUp();
 	}
 
 	if (lineAny())
