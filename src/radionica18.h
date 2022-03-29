@@ -3,48 +3,48 @@
 
 void RobotLine::radionica18() {
     if (setup()){
-        servo(90, 0);   // Raspon stupnjeva od 0 do 90 do 140
-        servo(40, 1);   // Raspon stupnjeva od 
-        servo(60, 2);   // Raspon stupnjeva od 
+        servo(140, 0);   // Raspon stupnjeva od 130 do 150
+        servo(60, 1);   // Raspon stupnjeva od 0 - 90
+        servo(40, 2);   // Raspon stupnjeva od 90 - 0
     }
     
     if (lineAny()){
-        lineFollow();
+        if (line(0) and line(8)){
+            go(70, -70);
+            delayMs(600);
+        }
+        else 
+            lineFollow();
     }
     else
     {
-        if (frontRight < 200 and frontLeft > 200)
+        if (frontRight() < 200 and frontLeft() > 150)
         {
-            rightWall();  
+            if (front() < 130){
+                go(-70, 70);
+                delayMs(600);
+            }
+            if (frontRight() < 120){
+                go(30, 70);   
+            }
+            else
+                go(70, 30);
         }
         else
-            leftWall();
+        {
+            if (front() < 130){
+                go(70, -70);
+                delayMs(600);
+            }
+            if (frontLeft() < 120){
+                go(70, 30);
+            }
+            else
+                go(30, 70);    
+        }
     }
 }
 
-void rightWall(){
-    if (front() < 100){
-        go(70, -70);
-        delayMs(600);
-    }
-    if (frontRight < 150){
-        go(-70, 70);   
-    }
-    else
-        go(70, -70);
-}
-
-void leftWall(){
-    if (front() < 100){
-        go(-70, 70);
-        delayMs(600);
-    }
-    if (frontLeft < 150){
-        go(70, -70);
-    }
-    else
-        go(-70, 70);
-}
 
 /*
 Ponavljanje pračenje linije, pračenje zida i korištenje servo motora. 
