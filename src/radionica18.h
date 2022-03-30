@@ -3,32 +3,38 @@
 
 void RobotLine::radionica18() {
     if (setup()){
-        servo(140, 0);   // Raspon stupnjeva od 130 do 150
-        servo(80, 1);   // Raspon stupnjeva od 0 - 90
-        servo(10, 2);   // Raspon stupnjeva od 90 - 0
+        servo(140, 0);      // Raspon stupnjeva od 130 do 160
+        servo(80, 1);       // Raspon stupnjeva od 0 - 90
+        servo(10, 2);       // Raspon stupnjeva od 90 - 0
     }
     
-    if (lineAny()){  
-        if (not line(0) and not line(1) and not line(2) and not line(3) and not line(4) and not line(5) and line(8) and not line(7) and not line(6)){
+    if (lineAny()){
+        servo(160, 0);
+        servo(20, 1);
+        servo(70, 2);
+        if (front() > 160 and front() < 200 and frontLeft() < 120 and frontRight() < 120){
             stop();
             end();
-        }      
+        }        
         if (line(0) and line(8)){
             go(70, -70);
             delayMs(600);
-        }
-        else 
+        }    
+        else
             lineFollow();
     }
     else
     {
+        servo(140, 0);
+        servo(80, 1);
+        servo(10, 2);
         if (frontLeft() < 200)
         {   
             if (front() < 130){
                 go(70, -70);
                 delayMs(600);
             }
-            if (frontLeft() < 120){
+            if (frontLeft() < 100){
                 go(70, 30);   
             }
             else
@@ -40,7 +46,7 @@ void RobotLine::radionica18() {
                 go(-70, 70);
                 delayMs(600);
             }
-            if (frontRight() < 120){
+            if (frontRight() < 100){
                 go(30, 70);
             }
             else
