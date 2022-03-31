@@ -107,6 +107,12 @@ void RobotLine::armCatch() {
 	mrm_servo->write(CATCH_SERVO_R_CATCH, 2); // 
 }
 
+void RobotLine::armOpen() {
+	servo(140, 0);      // Range from 130 - 160
+	servo(80, 1);       // Range from 0 - 90
+	servo(10, 2);       // Range from 90 - 0}
+}
+
 /** Arm will go to ball-catch ready position.
 */
 void RobotLine::armCatchReady() {
@@ -118,9 +124,9 @@ void RobotLine::armCatchReady() {
 /** 
 */
 void RobotLine::armClose() {
-	mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm.
-	mrm_servo->write(CATCH_SERVO_L_CLOSE, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_CLOSE, 2); // 
+	servo(160, 0);
+	servo(20, 1);
+	servo(70, 2);
 }
 
 
@@ -1142,7 +1148,43 @@ uint8_t RobotLine::saturation(uint8_t deviceNumber) {
 @param servoNumber - Servo's ordinal number. Each call of function add() assigns a increasing number to the servo, starting with 0.
 */
 void RobotLine::servo(uint16_t degrees, uint8_t servoNumber){
-	return mrm_servo->write(degrees, servoNumber);
+	switch (servoNumber)
+	{
+	case 0:
+		if (degrees <= 130){
+			return mrm_servo->write(130, servoNumber);
+		}
+		else if (degrees >= 160){
+			return mrm_servo->write(160, servoNumber);
+		}
+		else{
+			return mrm_servo->write(degrees, servoNumber);
+		}
+		break;
+	case 1:
+		if (degrees <= 0){
+			return mrm_servo->write(0, servoNumber);
+		}
+		else if (degrees >= 90){
+			return mrm_servo->write(90, servoNumber);
+		}
+		else{
+			return mrm_servo->write(degrees, servoNumber);
+		}
+		break;
+	case 2:
+		if (degrees <= 0){
+			return mrm_servo->write(0, servoNumber);
+		}
+		else if (degrees >= 90){
+			return mrm_servo->write(90, servoNumber);
+		}
+		else{
+			return mrm_servo->write(degrees, servoNumber);
+		}
+		break;
+
+	}
 }
 
 /** Display fixed sign stored in sensor

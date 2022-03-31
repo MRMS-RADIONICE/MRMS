@@ -3,12 +3,15 @@
 
 void RobotLine::radionica() {
     if (setup()){
-        armOpen();
+        servo(140, 0);      // Raspon stupnjeva od 130 do 160
+        servo(80, 1);       // Raspon stupnjeva od 0 - 90
+        servo(10, 2);       // Raspon stupnjeva od 90 - 0
     }
     
     if (lineAny()){
-        armClose();
-        
+        servo(160, 0);
+        servo(20, 1);
+        servo(70, 2);
         if (front() > 160 and front() < 200 and frontLeft() < 120 and frontRight() < 120){
             stop();
             end();
@@ -22,8 +25,9 @@ void RobotLine::radionica() {
     }
     else
     {
-        armOpen();
-        
+        servo(140, 0);
+        servo(80, 1);
+        servo(10, 2);
         if (frontLeft() < 200)
         {   
             if (front() < 130){

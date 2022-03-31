@@ -1,17 +1,14 @@
 #pragma once
 #include <helper.h>
 
-void RobotLine::radionica18() {
+void RobotLine::radionica() {
     if (setup()){
-        servo(140, 0);      // Raspon stupnjeva od 130 do 160
-        servo(80, 1);       // Raspon stupnjeva od 0 - 90
-        servo(10, 2);       // Raspon stupnjeva od 90 - 0
+        armOpen();
     }
     
     if (lineAny()){
-        servo(160, 0);
-        servo(20, 1);
-        servo(70, 2);
+        armClose();
+        
         if (front() > 160 and front() < 200 and frontLeft() < 120 and frontRight() < 120){
             stop();
             end();
@@ -25,9 +22,8 @@ void RobotLine::radionica18() {
     }
     else
     {
-        servo(140, 0);
-        servo(80, 1);
-        servo(10, 2);
+        armOpen();
+        
         if (frontLeft() < 200)
         {   
             if (front() < 130){

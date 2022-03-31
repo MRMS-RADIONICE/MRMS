@@ -92,6 +92,14 @@ public:
 	*/
 	RobotLine(char name[] = (char*)"RCJ Line"); // Maximum 15 characters
 
+	/** Arm will go to wall following and ball catching position.
+	*/
+	void armOpen();
+
+	/** Arm will close.
+	*/	
+	void armClose();
+
 	/** Arm will go to ball-catch position.
 	*/
 	void armCatch();
@@ -99,8 +107,6 @@ public:
 	/** Arm will go to ball-catch ready position.
 	*/
 	void armCatchReady();
-
-	void armClose();
 
 	/** Arm will drop the ball.
 	*/
