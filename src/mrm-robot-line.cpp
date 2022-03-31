@@ -9,7 +9,7 @@
 #include "mrm-robot-line.h"
 #include <mrm-servo.h>
 #include <mrm-therm-b-can.h>
-#include <radionica18.h>
+#include <radionica.h>
 
 
 /** Constructor
@@ -895,7 +895,7 @@ void RobotLine::lineFollow() {
 
 
 void RobotLine::loop() {
-	radionica18();
+	radionica();
 }
 
 /** Generic actions, use them as templates
