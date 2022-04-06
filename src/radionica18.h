@@ -62,7 +62,7 @@ void RobotLine::radionica() {
                 go(70, 30);    
         }
         
-        // Ako nevidi zid ni s jedne strane robot ide ravno
+        // Ako ne vidi zid ni s jedne strane robot ide ravno
         else
             go(60, 60);
     }
