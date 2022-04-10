@@ -2,70 +2,136 @@
 #include <helper.h>
 
 void RobotLine::radionica() {
+    static bool lopta; 
     if (setup()){
-        servo(140, 0);      // Raspon stupnjeva od 130 do 160
-        servo(80, 1);       // Raspon stupnjeva od 0 - 90
-        servo(10, 2);       // Raspon stupnjeva od 90 - 0
+        lopta = false; 
+        armOpen();
     }
-    
-    if (lineAny()){
-        servo(160, 0);
-        servo(20, 1);
-        servo(70, 2);
-        if (front() > 160 and front() < 200 and frontLeft() < 120 and frontRight() < 120){
-            stop();
-            end();
-        }        
-        if (line(0) and line(8)){
-            go(70, -70);
-            delayMs(600);
-        }    
-        else
+
+    if (lopta == false){
+        if(lineAny()){
+            armClose();
+
+            if (line(8) and line(4) and front() > 200){
+                catchBall();
+                lopta = true;
+            }
+
             lineFollow();
+        } 
+        else{
+            // Priprema robota za praćenje zida
+            armOpen();
+
+            wallFollowLeft();
+            wallFollowRight();
+        }
     }
-    else
-    {
-        servo(140, 0);
-        servo(80, 1);
-        servo(10, 2);
-        if (frontLeft() < 200)
-        {   
-            if (front() < 130){
-                go(70, -70);
-                delayMs(600);
-            }
-            if (frontLeft() < 100){
-                go(70, 30);   
-            }
-            else
-                go(30, 70);
+    else{
+        if(lineAny()){
+            if (line(8) and line(0) and front() < 200){
+                stop();
+                armDrop();
+                delayMs(100);
+                end();
+            }  
+              lineFollow();
         }
-        else if(frontRight() < 200)
-        {
-            if (front() < 130){
-                go(-70, 70);
-                delayMs(600);
-            }
-            if (frontRight() < 100){
-                go(30, 70);
-            }
-            else
-                go(70, 30);    
+        else{
+
+            wallFollowLeftCarry();
+            wallFollowRightCarry();
         }
-        else
-            go(60, 60);
     }
 }
 
+void RobotLine::wallFollowRight() {
+    // Praćenje zida s desne strane
+    if(frontRight() < 200)
+    {
+        if (front() < 130){
+            go(-70, 70);
+            delayMs(600);
+        }
+        if (frontRight() < 100){
+            go(30, 70);
+        }
+        else
+            go(70, 30);    
+    }
+    else
+        go(60, 60);
+}
 
-/*
-Ponavljanje pračenje linije, pračenje zida i korištenje servo motora. 
-Naglasak na sljedećim naredbama: 
-    --> go();
-    --> delayMs();
-    --> lineFollow();
-    --> frontLeft();
-    --> frontRight();
-    --> front();
-Cilj: Preći s pračenja linije na pračenje zida i nazad
-*/
+void RobotLine::wallFollowLeft() {
+    // Prioritet stavljen na praćenje zida s lijeve strane
+    if (frontLeft() < 200)
+    {   
+        if (front() < 130){
+            go(70, -70);
+            delayMs(600);
+        }
+        if (frontLeft() < 100){
+            go(70, 30);   
+        }
+        else
+            go(30, 70);
+    }
+}
+
+void RobotLine::catchBall() {
+    stop();
+    delayMs(50);
+    armCatchReady();
+    go(40, 40);
+    delayMs(2000);
+    go(20, 20);
+    delayMs(1000);
+    armCatch();
+    stop();
+    delayMs(50);
+    go(-40, -40);
+    delayMs(1500);
+    stop();
+    delayMs(50);
+    go(70, -70);
+    delayMs(1300);
+    stop();
+    delayMs(50);
+    go(70, 70);
+    delayMs(500);
+}
+
+void RobotLine::wallFollowRightCarry() {
+    // Praćenje zida s desne strane
+    if(frontRight() < 200)
+    {
+        if (front() < 130){
+            go(-70, 70);
+            delayMs(600);
+        }
+        if (frontRight() < 160){
+            go(30, 70);
+        }
+        else
+            go(70, 30);    
+    }
+    else
+        go(60, 60);
+}
+
+void RobotLine::wallFollowLeftCarry() {
+    // Prioritet stavljen na praćenje zida s lijeve strane
+    if (frontLeft() < 200)
+    {   
+        if (front() < 130){
+            go(-70, 70);
+            delayMs(600);
+        }
+        if (frontLeft() < 160){
+            go(70, 30);   
+        }
+        else
+            go(30, 70);
+    }
+}

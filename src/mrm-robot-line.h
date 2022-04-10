@@ -92,6 +92,16 @@ public:
 	*/
 	RobotLine(char name[] = (char*)"RCJ Line"); // Maximum 15 characters
 
+	void wallFollowRight();
+
+	void wallFollowLeft();
+
+	void catchBall();
+
+	void wallFollowRightCarry();
+
+	void wallFollowLeftCarry();
+	
 	/** Arm will go to wall following and ball catching position.
 	*/
 	void armOpen();

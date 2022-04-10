@@ -102,9 +102,9 @@ RobotLine::RobotLine(char name[]) : Robot(name) {
 /** Arm will go to ball-catch position.
 */
 void RobotLine::armCatch() {
-	mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm. Parameter 0 defines servo, in this case lift-servo. LIFT_SERVO_DOWN is angle.
-	mrm_servo->write(CATCH_SERVO_L_CATCH, 1); // Catch the ball. Parameter 1 - catch-servo. CATCH_SERVO_CLOSE is angle.
-	mrm_servo->write(CATCH_SERVO_R_CATCH, 2); // 
+	mrm_servo->write(135, 0); // Lower the arm. Parameter 0 defines servo, in this case lift-servo. LIFT_SERVO_DOWN is angle.
+	mrm_servo->write(30, 1); // Catch the ball. Parameter 1 - catch-servo. CATCH_SERVO_CLOSE is angle.
+	mrm_servo->write(70, 2); // 
 }
 
 void RobotLine::armOpen() {
@@ -116,15 +116,15 @@ void RobotLine::armOpen() {
 /** Arm will go to ball-catch ready position.
 */
 void RobotLine::armCatchReady() {
-	mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm.
-	mrm_servo->write(CATCH_SERVO_L_OPEN, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_OPEN, 2); // 
+	mrm_servo->write(135, 0); // Lower the arm.
+	mrm_servo->write(90, 1); // 
+	mrm_servo->write(0, 2); // 
 }
 
 /** 
 */
 void RobotLine::armClose() {
-	servo(160, 0);
+	servo(140, 0);
 	servo(20, 1);
 	servo(70, 2);
 }
@@ -133,17 +133,17 @@ void RobotLine::armClose() {
 /** 
 */
 void RobotLine::armDrop() {
-	mrm_servo->write(LIFT_SERVO_UP, 0); // Lift the arm.
-	mrm_servo->write(CATCH_SERVO_L_OPEN, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_OPEN, 2); // 
+	mrm_servo->write(230, 0); // Lift the arm.
+	mrm_servo->write(90, 1); // 
+	mrm_servo->write(0, 2); // 
 }
 
 /** 
 */
 void RobotLine::armUp() {
-	mrm_servo->write(CATCH_SERVO_L_CLOSE, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_CLOSE, 2); // 
-	mrm_servo->write(LIFT_SERVO_UP, 0); // Lift the arm.
+	mrm_servo->write(0, 1); // 
+	mrm_servo->write(90, 2); // 
+	mrm_servo->write(235, 0); // Lift the arm.
 }
 
 /** Barrier interrupted?
