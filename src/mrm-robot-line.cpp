@@ -9,7 +9,7 @@
 #include "mrm-robot-line.h"
 #include <mrm-servo.h>
 #include <mrm-therm-b-can.h>
-#include <radionica18.h>
+#include <radionica.h>
 
 
 /** Constructor
@@ -102,42 +102,48 @@ RobotLine::RobotLine(char name[]) : Robot(name) {
 /** Arm will go to ball-catch position.
 */
 void RobotLine::armCatch() {
-	mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm. Parameter 0 defines servo, in this case lift-servo. LIFT_SERVO_DOWN is angle.
-	mrm_servo->write(CATCH_SERVO_L_CATCH, 1); // Catch the ball. Parameter 1 - catch-servo. CATCH_SERVO_CLOSE is angle.
-	mrm_servo->write(CATCH_SERVO_R_CATCH, 2); // 
+	mrm_servo->write(135, 0); // Lower the arm. Parameter 0 defines servo, in this case lift-servo. LIFT_SERVO_DOWN is angle.
+	mrm_servo->write(30, 1); // Catch the ball. Parameter 1 - catch-servo. CATCH_SERVO_CLOSE is angle.
+	mrm_servo->write(70, 2); // 
+}
+
+void RobotLine::armOpen() {
+	servo(140, 0);      // Range from 130 - 160
+	servo(80, 1);       // Range from 0 - 90
+	servo(10, 2);       // Range from 90 - 0}
 }
 
 /** Arm will go to ball-catch ready position.
 */
 void RobotLine::armCatchReady() {
-	mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm.
-	mrm_servo->write(CATCH_SERVO_L_OPEN, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_OPEN, 2); // 
+	mrm_servo->write(135, 0); // Lower the arm.
+	mrm_servo->write(90, 1); // 
+	mrm_servo->write(0, 2); // 
 }
 
 /** 
 */
 void RobotLine::armClose() {
-	mrm_servo->write(LIFT_SERVO_DOWN, 0); // Lower the arm.
-	mrm_servo->write(CATCH_SERVO_L_CLOSE, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_CLOSE, 2); // 
+	servo(140, 0);
+	servo(20, 1);
+	servo(70, 2);
 }
 
 
 /** 
 */
 void RobotLine::armDrop() {
-	mrm_servo->write(LIFT_SERVO_UP, 0); // Lift the arm.
-	mrm_servo->write(CATCH_SERVO_L_OPEN, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_OPEN, 2); // 
+	mrm_servo->write(230, 0); // Lift the arm.
+	mrm_servo->write(90, 1); // 
+	mrm_servo->write(0, 2); // 
 }
 
 /** 
 */
 void RobotLine::armUp() {
-	mrm_servo->write(CATCH_SERVO_L_CLOSE, 1); // 
-	mrm_servo->write(CATCH_SERVO_R_CLOSE, 2); // 
-	mrm_servo->write(LIFT_SERVO_UP, 0); // Lift the arm.
+	mrm_servo->write(0, 1); // 
+	mrm_servo->write(90, 2); // 
+	mrm_servo->write(235, 0); // Lift the arm.
 }
 
 /** Barrier interrupted?
@@ -895,7 +901,7 @@ void RobotLine::lineFollow() {
 
 
 void RobotLine::loop() {
-	radionica18();
+	radionica();
 }
 
 /** Generic actions, use them as templates
@@ -1142,7 +1148,43 @@ uint8_t RobotLine::saturation(uint8_t deviceNumber) {
 @param servoNumber - Servo's ordinal number. Each call of function add() assigns a increasing number to the servo, starting with 0.
 */
 void RobotLine::servo(uint16_t degrees, uint8_t servoNumber){
-	return mrm_servo->write(degrees, servoNumber);
+	switch (servoNumber)
+	{
+	case 0:
+		if (degrees <= 130){
+			return mrm_servo->write(130, servoNumber);
+		}
+		else if (degrees >= 160){
+			return mrm_servo->write(160, servoNumber);
+		}
+		else{
+			return mrm_servo->write(degrees, servoNumber);
+		}
+		break;
+	case 1:
+		if (degrees <= 0){
+			return mrm_servo->write(0, servoNumber);
+		}
+		else if (degrees >= 90){
+			return mrm_servo->write(90, servoNumber);
+		}
+		else{
+			return mrm_servo->write(degrees, servoNumber);
+		}
+		break;
+	case 2:
+		if (degrees <= 0){
+			return mrm_servo->write(0, servoNumber);
+		}
+		else if (degrees >= 90){
+			return mrm_servo->write(90, servoNumber);
+		}
+		else{
+			return mrm_servo->write(degrees, servoNumber);
+		}
+		break;
+
+	}
 }
 
 /** Display fixed sign stored in sensor

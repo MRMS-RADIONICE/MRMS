@@ -92,6 +92,24 @@ public:
 	*/
 	RobotLine(char name[] = (char*)"RCJ Line"); // Maximum 15 characters
 
+	void wallFollowRight();
+
+	void wallFollowLeft();
+
+	void catchBall();
+
+	void wallFollowRightCarry();
+
+	void wallFollowLeftCarry();
+	
+	/** Arm will go to wall following and ball catching position.
+	*/
+	void armOpen();
+
+	/** Arm will close.
+	*/	
+	void armClose();
+
 	/** Arm will go to ball-catch position.
 	*/
 	void armCatch();
@@ -99,8 +117,6 @@ public:
 	/** Arm will go to ball-catch ready position.
 	*/
 	void armCatchReady();
-
-	void armClose();
 
 	/** Arm will drop the ball.
 	*/
@@ -352,30 +368,6 @@ public:
 	@return - Roll in degrees. Inclination to the left or right. Values -90 - 90. Leveled robot shows 0�.
 	*/
 	void radionica();
-	void radionica1();
-	void radionica2();
-	void radionica3();
-	void radionica4();
-	void radionica5();
-	void radionica6();
-	void radionica7();
-	void radionica8();
-	void radionica9();
-	void radionica10();
-	void radionica11();
-	void radionica12();
-	void radionica13();
-	void radionica14();
-	void radionica15();
-	void radionica16();
-	void radionica17();
-	void radionica18();
-	void radionica19();
-	void radionica20();
-	void radionica21();
-	void radionica22();
-	void radionica23();
-	void radionica24();
 
 	/** Color sensor's saturation
 	@param deviceNumber - Device's ordinal number. Each call of function add() assigns a increasing number to the device, starting with 0.
